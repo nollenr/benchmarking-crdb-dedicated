@@ -159,7 +159,44 @@ cockroach sql --url "postgresql://ron:<ENTER-PASSWORD>@nollen-twilio-clstr-76s.a
 
 
 ### Delete Cluster
+HTTP Request
+```
 curl --request DELETE \
   --url https://cockroachlabs.cloud/api/v1/clusters/728133a5-6351-4bdb-b939-578fd516c9ac \
-  --header 'Authorization: Bearer {API KEY}'
+  --header 'Authorization: Bearer CCDB1_dZjwpQnpsO9OoOgiMtgPZ7_yPIJTD8Awp8MyeMhcuZdIDiVAPiXxmnCITqHNvuo'
+```
 
+Response
+```
+{
+  "id": "728133a5-6351-4bdb-b939-578fd516c9ac",
+  "name": "nollen-twilio-clstr",
+  "cockroach_version": "v22.1.1",
+  "plan": "DEDICATED",
+  "cloud_provider": "AWS",
+  "account_id": "456288520688",
+  "state": "DELETED",
+  "creator_id": "05de9bfb-098c-4179-b80f-f250838c7797",
+  "operation_status": "CLUSTER_STATUS_UNSPECIFIED",
+  "config": {
+    "dedicated": {
+      "machine_type": "m5.2xlarge",
+      "num_virtual_cpus": 8,
+      "storage_gib": 300,
+      "memory_gib": 32,
+      "disk_iops": 4500
+    }
+  },
+  "regions": [
+    {
+      "name": "us-west-2",
+      "sql_dns": "nollen-twilio-clstr-76s.aws-us-west-2.cockroachlabs.cloud",
+      "ui_dns": "admin-nollen-twilio-clstr-76s.aws-us-west-2.cockroachlabs.cloud",
+      "node_count": 9
+    }
+  ],
+  "created_at": "2022-06-16T20:22:40.715402Z",
+  "updated_at": "2022-06-16T21:22:21.243459Z",
+  "deleted_at": "2022-06-16T21:22:21.243277Z"
+}
+```
