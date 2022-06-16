@@ -1,5 +1,17 @@
 # Create Single Region TPC-C Test Cluster
 
+- [Create Single Region TPC-C Test Cluster](#create-single-region-tpc-c-test-cluster)
+  - [Create a CockroachDB cluster in CockroachDB Dedicated.](#create-a-cockroachdb-cluster-in-cockroachdb-dedicated)
+    - [Create Cluster](#create-cluster)
+    - [Check Cluster Status](#check-cluster-status)
+    - [Add an item to the IP Allow List](#add-an-item-to-the-ip-allow-list)
+    - [Create a New SQL User](#create-a-new-sql-user)
+    - [Retrieve the Cert (for SSL)](#retrieve-the-cert-for-ssl)
+    - [Connect to the Cluster](#connect-to-the-cluster)
+    - [Delete Cluster](#delete-cluster)
+
+
+
 ## Create a CockroachDB cluster in CockroachDB Dedicated.  
 - Cloud Provider: AWS
 - Region: us-west-2
@@ -96,7 +108,55 @@ Response
   "deleted_at": null
 ```
 
-Note that the state is "CREATING".  When cluster creation is complete the state will be "".
+Note that the state is "CREATING".  When cluster creation is complete the state will be "CREATED".
+
+### Add an item to the IP Allow List
+HTTP Request
+```
+curl --request POST \
+  --url https://cockroachlabs.cloud/api/v1/clusters/728133a5-6351-4bdb-b939-578fd516c9ac/networking/allowlist \
+  --header 'Authorization: Bearer {API KEY} ' \
+  --data '{"cidr_ip":"72.132.195.192","cidr_mask":32,"ui":true,"sql":true,"name":"Ron"}'
+```
+
+Response
+```
+{
+  "cidr_ip": "72.132.195.192",
+  "cidr_mask": 32,
+  "ui": true,
+  "sql": true,
+  "name": "Ron"
+}
+```
+
+### Create a New SQL User
+HTTP Request
+```
+curl --request POST \
+  --url https://cockroachlabs.cloud/api/v1/clusters/728133a5-6351-4bdb-b939-578fd516c9ac/sql-users \
+  --header 'Authorization: Bearer {API KEY}' \
+  --header 'content-type: application/json' \
+  --data '{"name":"ron","password":"example_password"}'
+```
+
+Response
+```
+{
+  "name": "ron"
+}
+```
+
+### Retrieve the Cert (for SSL)
+```
+curl --create-dirs -o $HOME/Library/CockroachCloud/certs/nollen-twilio-clstr-ca.crt -O https://cockroachlabs.cloud/clusters/728133a5-6351-4bdb-b939-578fd516c9ac/cert
+```
+
+### Connect to the Cluster
+```
+cockroach sql --url "postgresql://ron:<ENTER-PASSWORD>@nollen-twilio-clstr-76s.aws-us-west-2.cockroachlabs.cloud:26257/defaultdb?sslmode=verify-full&sslrootcert=$HOME/Library/CockroachCloud/certs/nollen-twilio-clstr-ca.crt"
+```
+
 
 ### Delete Cluster
 curl --request DELETE \
