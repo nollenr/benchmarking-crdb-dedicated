@@ -163,7 +163,7 @@ HTTP Request
 ```
 curl --request DELETE \
   --url https://cockroachlabs.cloud/api/v1/clusters/728133a5-6351-4bdb-b939-578fd516c9ac \
-  --header 'Authorization: Bearer CCDB1_dZjwpQnpsO9OoOgiMtgPZ7_yPIJTD8Awp8MyeMhcuZdIDiVAPiXxmnCITqHNvuo'
+  --header 'Authorization: Bearer {API KEY}'
 ```
 
 Response
