@@ -19,9 +19,10 @@ The topology for the single region TPC-C test is:
 - CockroachDB running 21.1.1 (the standard version used as of this writing for a dedicated cluster)
 - an c5a.2xlarge to connect to the cluster and execute the tpc-c benchmark running Amazon Linux 2
 - a VPC PrivateLink between the CockroachDB Dedicated VPC and my instance
-![single-region-topology](twilio-tpc-c-topology-single-region.jpg)
+![single-region-topology](jpg/twilio-tpc-c-topology-single-region.jpg)
 
 ### Initialize the Workload
+Workoad initialized in 9 node 8vCPU Cluster
 ```
 nohup cockroach workload init tpcc \
 --warehouses 7650 \
@@ -68,16 +69,16 @@ cockroach workload run tpcc \
 ## 3 Region, TPC-C Run in Same Region as Lease Holders
 The multi-region topology is generally the same as the single region workload.  The major difference being that the tables were created as regional tables (primary region us-east-1).
 
-![multi-region-topology](twilio-tpc-c-topology-multi-region.jpg)
+![multi-region-topology](jpg/twilio-tpc-c-topology-multi-region.jpg)
 
 ## 3 Region, TPC-C Run in Region Closest to Lease Holders
 In this test, the "Application Node" running the TPC workload attached to the region closest to the lease holders of the regional tables.  In this case, the lease holders were in the primary region (us-east-1) and application node was in the us-east-2 region and connected to nodes of the cluster in us-east-2.  
 
-![multi-region-topology-2](twilio-tpc-c-topology-multi-region-2.jpg)
+![multi-region-topology-2](jpg/twilio-tpc-c-topology-multi-region-2.jpg)
 
 ## 3 Region, TPC-C Run in Region Farthest from Lease Holders
 In the final test, the "Application Node" running the TPC workload attached to the region farthest from the lease holders or the regional tables.  In this case, the lease holders were in the primary region (us-east-1) and the application node was in the us-west-2 region and connected to nodes of the cluster in us-west-2.
 
-![multi-region-topology-3](twilio-tpc-c-topology-multi-region-3.jpg)
+![multi-region-topology-3](jpg/twilio-tpc-c-topology-multi-region-3.jpg)
 
 
