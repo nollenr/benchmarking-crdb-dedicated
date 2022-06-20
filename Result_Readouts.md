@@ -24,8 +24,10 @@ Successful tpmC efficiency rating should be between 95% and 98%.    See the TPC-
 ## Single Region (us-west-2) 9 Node 16vCPU
 |Cluster Topology|App Node Location|Cluster Size|Active Warehouses|Efficiency|QPS|p99|Console Metrics|Log|
 |------------------|----------|----------------|------------|----------------|-----------|-----------|--------|----------|
-|Single Region|us-west-2|9 Nodes 16vCPU|4000|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-SR-9node-8vcpu-3000warehouses.pdf)|[Log](logs/tpcc-9node-8vcpu-3500warehouses.log)|
-|Single Region|us-west-2|9 Nodes 16vCPU|5000|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-SR-9node-8vcpu-3500warehouses.pdf)|[Log](logs/tpcc-9node-8vcpu-3500warehouses.log)|
-|Single Region|us-west-2|9 Nodes 16vCPU|6000|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-SR-9node-8vcpu-3750warehouses.pdf)|[Log](logs/tpcc-9node-8vcpu-3500warehouses.log)|
-|Single Region|us-west-2|9 Nodes 16vCPU|7000|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-SR-9node-8vcpu-4000warehouses.pdf)|[Log](logs/tpcc-9node-8vcpu-3500warehouses.log)|
+|Single Region|us-west-2|9 Nodes 16vCPU|4000|98.3%|13871|11.5ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-SR-9node-16vcpu-4000warehouses.pdf)|[Log](logs/tpcc-9node-16vcpu-4000warehouses.log)|
+|Single Region|us-west-2|9 Nodes 16vCPU|5000|98.3%|17471|16ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-SR-9node-16vcpu-5000warehouses.pdf)|[Log](logs/tpcc-9node-8vcpu-3500warehouses.log)|
+|Single Region|us-west-2|9 Nodes 16vCPU|6000|98.2%|21008|23ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-SR-9node-86vcpu-6000warehouses.pdf)|[Log](logs/tpcc-9node-16vcpu-6000warehouses.log)|
+|Single Region|us-west-2|9 Nodes 16vCPU|7000|98.1%|24560|44ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-SR-9node-16vcpu-7000warehouses.pdf)|[Log](logs/tpcc-9node-16vcpu-7000warehouses.log)|
+|Single Region|us-west-2|9 Nodes 16vCPU|7650|98%|26542|57ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-SR-9node-16vcpu-7650warehouses.pdf)|[Log](logs/tpcc-9node-16vcpu-7650warehouses.log)|
 
+I believe the 9-node 16vCPU system could have processed in execess of 8000 warehouses with an efficiency above 95%.

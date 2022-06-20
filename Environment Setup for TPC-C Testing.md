@@ -67,7 +67,28 @@ cockroach workload run tpcc \
 
 
 ## 3 Region, TPC-C Run in Same Region as Lease Holders
-The multi-region topology is generally the same as the single region workload.  The major difference being that the tables were created as regional tables (primary region us-east-1).
+The multi-region topology is generally the same as the single region workload.  The major difference being that the tables were created as **regional tables** (primary region us-east-1, secondary regions us-east-2 and us-west-2).
+
+The cluster topology is:
+us-east-1: 9 nodes 8vCPU per Node
+us-east-2: 9 nodes 8vCPU per Node
+us-west-2: 9 nodes 8vCPU per Node
+300GB per node (4500 IOPS)
+
+The database (tpcc) primary region is us-east-1 and the database survivability goal is regional.  
+
+```
+-- put lease holders in the primary region
+ALTER DATABASE system CONFIGURE ZONE USING lease_preferences = '[[+region=aws-us-east-1]]';
+
+ALTER DATABASE tpcc PRIMARY REGION "aws-us-east-1";
+ALTER DATABASE tpcc ADD REGION "aws-us-east-2";
+ALTER DATABASE tpcc ADD REGION "aws-us-west-2";
+ALTER DATABASE tpcc SURVIVE REGION FAILURE;
+
+USE tpcc;
+SHOW SURVIVAL GOAL FROM DATABASE;
+```
 
 ![multi-region-topology](jpg/twilio-tpc-c-topology-multi-region.jpg)
 
