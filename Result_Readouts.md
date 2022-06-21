@@ -51,18 +51,43 @@ I believe the 9-node 16vCPU system could have processed in execess of 8000 wareh
 ## Multi-Region -  us-east-1, us-east-2, 9 Node 8vCPU
 In these test scenarios, we have a multi-region database with region survivability (should an entire AWS region fail, the databsae will continue to operate).  The tables in the test are all regional tables with replication factor 5,  lease holders in us-east-1 and replicas in us-east-2 and us-west-2.  
 
+<br/>
+
+Database Regions
+|     region     |                                    zones                                     | database_names | primary_region_of|
+|----------------|------------------------------------------------------------------------------|----------------|--------------------|
+|  aws-us-east-1 | {aws-us-east-1a,aws-us-east-1b,aws-us-east-1c,aws-us-east-1d,aws-us-east-1f} | {tpcc}         | {tpcc}|
+|  aws-us-east-2 | {aws-us-east-2a,aws-us-east-2b,aws-us-east-2c}                               | {tpcc}         | {} |
+|  aws-us-west-2 | {aws-us-west-2a,aws-us-west-2b,aws-us-west-2c,aws-us-west-2d}                | {tpcc}         | {} |
+
+<br/>
+
+Database Zone Configurations
+|     target     |                                           raw_config_sql |
+|----------------|------------------------------------------------------------------------------------------------------ |
+|  DATABASE tpcc | ALTER DATABASE tpcc CONFIGURE ZONE USING |
+|                |     range_min_bytes = 134217728, |
+|                |     range_max_bytes = 536870912, |
+|                |     gc.ttlseconds = 90000, |
+|                |     num_replicas = 5, |
+|                |     num_voters = 5, |
+|                |     constraints = '{+region=aws-us-east-1: 1, +region=aws-us-east-2: 1, +region=aws-us-west-2: 1}', |
+|                |     voter_constraints = '{+region=aws-us-east-1: 2}', |
+|                |     lease_preferences = '[[+region=aws-us-east-1]]' |
+
+<br/>
+
 ### Multi-Region Test #1 - App Server in us-east-1
 |Cluster Topology|App Node Location|Cluster Size|Active Warehouses|Efficiency|QPS|p99|Console Metrics|Log|
 |------------------|----------|----------------|------------|----------------|-----------|-----------|--------|----------|
-|Multi-Region|us-east-1|9 Nodes 8vCPU|3000|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-3000warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3000warehouses.log)|
-|Multi-Region|us-east-1|9 Nodes 8vCPU|3500|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-3500warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3500warehouses.log)|
-|Multi-Region|us-east-1|9 Nodes 8vCPU|3750|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-3750warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3750warehouses.log)|
-|Multi-Region|us-east-1|9 Nodes 8vCPU|4000|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-4000warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-4000warehouses.log)|
+|Multi-Region|us-east-1|9 Nodes 8vCPU|3000|97.5%|10433|151ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-3000warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3000warehouses.log)|
+|Multi-Region|us-east-1|9 Nodes 8vCPU|3250|96.8%|11130|285ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-32500warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-32500warehouses.log)|
+|Multi-Region|us-east-1|9 Nodes 8vCPU|3500|69.2%|8602|10200ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-3500warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3500warehouses.log)|
 
 ### Multi-Region Test #2 - App Server in us-east-2
 |Cluster Topology|App Node Location|Cluster Size|Active Warehouses|Efficiency|QPS|p99|Console Metrics|Log|
 |------------------|----------|----------------|------------|----------------|-----------|-----------|--------|----------|
-|Multi-Region|us-east-2|9 Nodes 8vCPU|3000|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-3000warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3000warehouses.log)|
+|Multi-Region|us-east-2|9 Nodes 8vCPU|3000|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-3000warehouses.pdf)|[Log](logs/tpcc-mr-use2-9node-8vcpu-3000warehouses.log)|
 |Multi-Region|us-east-2|9 Nodes 8vCPU|3500|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-3500warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3500warehouses.log)|
 |Multi-Region|us-east-2|9 Nodes 8vCPU|3750|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-3750warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3750warehouses.log)|
 |Multi-Region|us-east-2|9 Nodes 8vCPU|4000|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-4000warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-4000warehouses.log)|
@@ -74,6 +99,6 @@ In these test scenarios, we have a multi-region database with region survivabili
 |Multi-Region|us-west-2|9 Nodes 8vCPU|3000|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-3000warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3000warehouses.log)|
 |Multi-Region|us-west-2|9 Nodes 8vCPU|3500|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-3500warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3500warehouses.log)|
 |Multi-Region|us-west-2|9 Nodes 8vCPU|3750|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-3750warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3750warehouses.log)|
-|Multi-Region|us-west-2|9 Nodes 8vCPU|4000|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-4000warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-4000warehouses.log)|
+|Multi-Region|us-west-2|9 Nodes 8vCPU|4000|%||ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-4000warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-4000warehouses.log)|
 
 
