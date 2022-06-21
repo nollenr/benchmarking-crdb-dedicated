@@ -54,7 +54,7 @@ In these test scenarios, we have a multi-region database with region survivabili
 <br/>
 
 Database Regions
-|     region     |                                    zones                                     | database_names | primary_region_of|
+|     region     |                                    zones                                     | database names | primary region of|
 |----------------|------------------------------------------------------------------------------|----------------|--------------------|
 |  aws-us-east-1 | {aws-us-east-1a,aws-us-east-1b,aws-us-east-1c,aws-us-east-1d,aws-us-east-1f} | {tpcc}         | {tpcc}|
 |  aws-us-east-2 | {aws-us-east-2a,aws-us-east-2b,aws-us-east-2c}                               | {tpcc}         | {} |
