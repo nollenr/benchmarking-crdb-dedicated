@@ -48,7 +48,7 @@ I believe the 9-node 16vCPU system could have processed in execess of 8000 wareh
 
 <br/>
 
-## Multi-Region -  us-east-1, us-east-2, 9 Node 8vCPU
+## Multi-Region -  us-east-1, us-east-2, us-west-2 - 9 Node 8vCPU
 In these test scenarios, we have a multi-region database with region survivability (should an entire AWS region fail, the databsae will continue to operate).  The tables in the test are all regional tables with replication factor 5,  lease holders in us-east-1 and replicas in us-east-2 and us-west-2.  
 
 <br/>
@@ -87,10 +87,10 @@ Database Zone Configurations
 ### Multi-Region Test #2 - App Server in us-east-2
 |Cluster Topology|App Node Location|Cluster Size|Active Warehouses|Efficiency|QPS|p99|Console Metrics|Log|
 |------------------|----------|----------------|------------|----------------|-----------|-----------|--------|----------|
-|Multi-Region|us-east-2|9 Nodes 8vCPU|3000|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-3000warehouses.pdf)|[Log](logs/tpcc-mr-use2-9node-8vcpu-3000warehouses.log)|
-|Multi-Region|us-east-2|9 Nodes 8vCPU|3500|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-3500warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3500warehouses.log)|
-|Multi-Region|us-east-2|9 Nodes 8vCPU|3750|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-3750warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3750warehouses.log)|
-|Multi-Region|us-east-2|9 Nodes 8vCPU|4000|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-4000warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-4000warehouses.log)|
+|Multi-Region|us-east-2|9 Nodes 8vCPU|3000|97.4%|10218|65ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mr-ue2-9node-8vcpu-3000warehouses.pdf)|[Log](logs/tpcc-mr-use2-9node-8vcpu-3000warehouses.log)|
+|Multi-Region|us-east-2|9 Nodes 8vCPU|3250|97.4%|11123|63ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mr-ue2-9node-8vcpu-3250warehouses.pdf)|[Log](logs/tpcc-mr-use2-9node-8vcpu-3250warehouses.log)|
+|Multi-Region|us-east-2|9 Nodes 8vCPU|3500|%|11970|67ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mr-9node-8vcpu-3500warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3500warehouses.log)|
+|Multi-Region|us-east-2|9 Nodes 8vCPU|3750|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mr-9node-8vcpu-3750warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3750warehouses.log)|
 
 
 ### Multi-Region Test #1 - App Server in us-west-2
@@ -98,7 +98,5 @@ Database Zone Configurations
 |------------------|----------|----------------|------------|----------------|-----------|-----------|--------|----------|
 |Multi-Region|us-west-2|9 Nodes 8vCPU|3000|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-3000warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3000warehouses.log)|
 |Multi-Region|us-west-2|9 Nodes 8vCPU|3500|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-3500warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3500warehouses.log)|
-|Multi-Region|us-west-2|9 Nodes 8vCPU|3750|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-3750warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3750warehouses.log)|
-|Multi-Region|us-west-2|9 Nodes 8vCPU|4000|%||ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mR-9node-8vcpu-4000warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-4000warehouses.log)|
 
 
