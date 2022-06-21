@@ -19,17 +19,17 @@ Successful tpmC efficiency rating should be between 95% and 98%.    See the TPC-
 |Single Region|us-west-2|9 Nodes 8vCPU|3750|97.4%|13100|184ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-SR-9node-8vcpu-3750warehouses.pdf)|[Log](logs/tpcc-9node-8vcpu-3500warehouses.log)|
 |Single Region|us-west-2|9 Nodes 8vCPU|4000|85.5%|8000|12884ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-SR-9node-8vcpu-4000warehouses.pdf)|[Log](logs/tpcc-9node-8vcpu-3500warehouses.log)|
 
-<br/><br/>
+<br/>
 
 The original goal was to see how many TPC-C Warehouses I could process with a 9-node 8vCPU CockroachDB Cluster and the test results would indicate that number is approx. 3,750.
 
 But, what if I wanted to reach a goal of 7,650 Warehouses?  Would simply doubling the size of the cluster, double the amount of Warehouses I could process?
 
-The answer is "Yes!"  Doubling the size of the cluster from 9-nodes and 8vCPU per node to 9-nodes and 16vCPU, did allow me to double the amount of work I could process.  I could have also doubled from 9-nodes and 8vCPU per cluster to 18 nodes with 8vCPU to achieve the same result.  (To continue to achieve scaling we would also need to scale the underlying storage, which I did not do in this case.)
+The answer is "Yes!"  Doubling the size of the cluster from 9-nodes and 8vCPU per node to 9-nodes and 16vCPU, did allow me to double the amount of work I could process.  I could have also doubled from 9-nodes and 8vCPU per cluster to 18 nodes with 8vCPU to achieve the same result.  (To continue to achieve scaling we would also need to scale the underlying storage, which was unnecessary in this case.)  The test went from 13,000 QPS at 9 nodes and 8vCPU to 26,000 QPS at 9 nodes and 16vCPU.
 
 And with CockroachDB, not only can we provide near linear scaling, but the single region cluster achieves AZ fault tolerence with zero-RPO and zero-RTO.
 
-<br/><br/>
+<br/>
 
 ## Single Region (us-west-2) 9 Node 16vCPU
 |Cluster Topology|App Node Location|Cluster Size|Active Warehouses|Efficiency|QPS|p99|Console Metrics|Log|
