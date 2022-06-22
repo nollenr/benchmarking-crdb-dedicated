@@ -92,6 +92,8 @@ Database Zone Configurations
 |Multi-Region|us-east-2|9 Nodes 8vCPU|3500|97.5%|11970|67ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mr-ue2-9node-8vcpu-3500warehouses.pdf)|[Log](logs/tpcc-mr-use2-9node-8vcpu-3500warehouses.log)|
 |Multi-Region|us-east-2|9 Nodes 8vCPU|3750|97.3%|12872|75.5ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mr-9node-8vcpu-3750warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-3750warehouses.log)|
 |Multi-Region|us-east-2|9 Nodes 8vCPU|4000|97.4%|13705|84ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mr-9node-8vcpu-4000warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-4000warehouses.log)|
+|Multi-Region|us-east-2|9 Nodes 8vCPU|4500|97.4%|15354|134ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mr-9node-8vcpu-4500warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-4500warehouses.log)|
+|Multi-Region|us-east-2|9 Nodes 8vCPU|4750|97.3%|16506|142ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mr-9node-8vcpu-4750warehouses.pdf)|[Log](logs/tpcc-mr-9node-8vcpu-4750warehouses.log)|
 
 
 ### Multi-Region Test #1 - App Server in us-west-2
