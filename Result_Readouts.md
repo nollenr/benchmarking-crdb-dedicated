@@ -99,7 +99,19 @@ Database Zone Configurations
 ### Multi-Region Test #1 - App Server in us-west-2
 |Cluster Topology|App Node Location|Cluster Size|Active Warehouses|Efficiency|QPS|p99|Console Metrics|Log|
 |------------------|----------|----------------|------------|----------------|-----------|-----------|--------|----------|
-|Multi-Region|us-west-2|9 Nodes 8vCPU|3000|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mr-uw2-9node-8vcpu-3000warehouses.pdf)|[Log](logs/tpcc-mr-usw2-9node-8vcpu-3000warehouses.log)|
-|Multi-Region|us-west-2|9 Nodes 8vCPU|3500|%|x|ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mr-uw2-9node-8vcpu-3500warehouses.pdf)|[Log](logs/tpcc-mr-usw2-9node-8vcpu-3500warehouses.log)|
+|Multi-Region|us-west-2|9 Nodes 8vCPU|2000|94%|6847|520ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mr-uw2-9node-8vcpu-2000warehouses.pdf)|[Log](logs/tpcc-mr-usw2-9node-8vcpu-2000warehouses.log)|
+|Multi-Region|us-west-2|9 Nodes 8vCPU|2500|94%|8375|520ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mr-uw2-9node-8vcpu-2500warehouses.pdf)|[Log](logs/tpcc-mr-usw2-9node-8vcpu-2500warehouses.log)|
+|Multi-Region|us-west-2|9 Nodes 8vCPU|2750|94%|9222|503ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mr-uw2-9node-8vcpu-2750warehouses.pdf)|[Log](logs/tpcc-mr-usw2-9node-8vcpu-2750warehouses.log)|
+|Multi-Region|us-west-2|9 Nodes 8vCPU|3000|94%|10098|503ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mr-uw2-9node-8vcpu-3000warehouses.pdf)|[Log](logs/tpcc-mr-usw2-9node-8vcpu-3000warehouses.log)|
 
+In order to increase preformance for the us-west-2 region, I changed the warehouse table to be "GLOBAL".
+
+```ALTER TABLE warehouse SET LOCALITY GLOBAL;```
+
+The warehouse table is a good candidate for GLOBAL because district table has a foreign key relationship to warehouse on w_id. Now FK lookups on district will have local latencies via warehouse.w_id.  The p99, was reduced considerably by converting the warehouse table to a Global table.  I strongly advise against setting district table to GLOBAL, you will encounter a lot of contention, retries and bad latencies.
+
+### Multi-Region Test #1 - App Server in us-west-2 with Warehouse as a Global Table.
+|Cluster Topology|App Node Location|Cluster Size|Active Warehouses|Efficiency|QPS|p99|Console Metrics|Log|
+|------------------|----------|----------------|------------|----------------|-----------|-----------|--------|----------|
+|Multi-Region|us-west-2|9 Nodes 8vCPU|3000|94%|9948|386ms|[Console](https://github.com/nollenr/benchmarking-crdb-dedicated/blob/main/console-pdf/Metrics-Cockroach-Console-mr-uw2-gt-9node-8vcpu-3000warehouses.pdf)|[Log](logs/tpcc-mr-usw2-gt-9node-8vcpu-3000warehouses.log)|
 
