@@ -3,10 +3,11 @@
 - [TPC-C Result Readout](#tpc-c-result-readout)
   - [Single Region (us-west-2) 9 Node 8vCPU](#single-region-us-west-2-9-node-8vcpu)
   - [Single Region (us-west-2) 9 Node 16vCPU](#single-region-us-west-2-9-node-16vcpu)
-  - [Multi-Region -  us-east-1, us-east-2, 9 Node 8vCPU](#multi-region----us-east-1-us-east-2-9-node-8vcpu)
+  - [Multi-Region -  us-east-1, us-east-2, us-west-2 - 9 Node 8vCPU](#multi-region----us-east-1-us-east-2-us-west-2---9-node-8vcpu)
     - [Multi-Region Test #1 - App Server in us-east-1](#multi-region-test-1---app-server-in-us-east-1)
     - [Multi-Region Test #2 - App Server in us-east-2](#multi-region-test-2---app-server-in-us-east-2)
     - [Multi-Region Test #1 - App Server in us-west-2](#multi-region-test-1---app-server-in-us-west-2)
+    - [Multi-Region Test #1 - App Server in us-west-2 with Warehouse as a Global Table.](#multi-region-test-1---app-server-in-us-west-2-with-warehouse-as-a-global-table)
 
 <br/>
 
