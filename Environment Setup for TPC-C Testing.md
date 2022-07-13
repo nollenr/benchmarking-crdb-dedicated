@@ -61,8 +61,10 @@ WITH new_db_name = tpccx;
 ```
 cockroach workload run tpcc \
 --warehouses=7650 \
---duration=15m \
-"postgresql://ron:${mypass}@internal-nollen-twilio-clstr-778.aws-us-west-2.cockroachlabs.cloud:26257/tpcc?sslmode=verify-full&sslrootcert=$HOME/Library/CockroachCloud/certs/nollen-twilio-clstr-ca.crt"
+--duration=12m \
+--active-warehouses=3750 \
+--ramp=2m0s \
+"postgresql://ron:${mypass}@internal-nollen-twilio-tpcc-77w.aws-us-west-2.cockroachlabs.cloud:26257/tpcc?sslmode=verify-full&sslrootcert=$HOME/Library/CockroachCloud/certs/nollen-twilio-tpcc-ca.crt" > tpcc-9node-8vcpu-3750warehouses-202207130913.log
 ```
 
 
