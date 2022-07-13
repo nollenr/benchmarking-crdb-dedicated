@@ -16,7 +16,7 @@
 The topology for the single region TPC-C test is:
 - 9 m5.2xlarge Nodes (the standard instance type used as of this writing for an 8vCPU dedicated cluster)
 - 300gb per node
-- CockroachDB running 21.1.1 (the standard version used as of this writing for a dedicated cluster)
+- CockroachDB running 22.1.2 (the standard version used as of this writing for a dedicated cluster)
 - an c5a.2xlarge to connect to the cluster and execute the tpc-c benchmark running Amazon Linux 2
 - a VPC PrivateLink between the CockroachDB Dedicated VPC and my instance
 ![single-region-topology](jpg/twilio-tpc-c-topology-single-region.jpg)
